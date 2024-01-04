@@ -21,6 +21,6 @@ public class CategoryEntity extends BaseEntity {
     private String nameCategory;
     @Column(name = "DESCRIPTION_CATEGORY")
     private String descriptionCategory;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category", cascade = CascadeType.MERGE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category", cascade = CascadeType.PERSIST)
     private List<CharityEntity> charities;
 }

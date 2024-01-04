@@ -9,11 +9,10 @@ import com.example.bootcampcharity.util.ResourceBundleUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 public abstract class BaseController<E,D,ID> {
     @Autowired
@@ -42,5 +41,47 @@ public abstract class BaseController<E,D,ID> {
                 .data(result)
                 .build();
 
+    }
+
+    @GetMapping("/findById/{id}")
+    @Transactional(readOnly = true)
+    public CharityResponse<?> findById(@PathVariable ID id, @RequestHeader("lang") String lang) {
+
+        E byId = baseService.findById(id);
+        D find = baseConverter.convertDto(byId);
+        return CharityResponse.builder()
+                .message(resourceBundleUtil.getMessage("operation.successful.run", lang))
+                .code("operation.successful.run")
+                .date(new Date())
+                .hasError(false)
+                .data(find)
+                .build();
+    }
+
+    @GetMapping("/findAll")
+    @Transactional(readOnly = true)
+    public CharityResponse<?> findAll(@RequestHeader("lang") String lang) {
+        List<E> all = baseService.findAll();
+        List<D> find = baseConverter.converterDtoes(all);
+        return CharityResponse.builder()
+                .message(resourceBundleUtil.getMessage("users.finded.successfull", lang))
+                .code("users.finded.successfull")
+                .date(new Date())
+                .hasError(false)
+                .data(find)
+                .build();
+    }
+
+    @DeleteMapping("/delete")
+    @Transactional
+    public CharityResponse<?> deleteById(@RequestParam ID id, @RequestHeader("lang") String lang) {
+        baseService.deleteById(id);
+        return CharityResponse.builder()
+                .message(resourceBundleUtil.getMessage("user.delete.successfull", lang))
+                .code("user.delete.successfull")
+                .date(new Date())
+                .hasError(false)
+                .data(true)
+                .build();
     }
 }

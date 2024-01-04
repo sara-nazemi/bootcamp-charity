@@ -17,7 +17,7 @@ public class WalletServiceCallImpl implements WalletServiceCall{
     //https://docs.spring.io/spring-framework/docs/3.2.x/javadoc-api/org/springframework/test/web/client/MockRestServiceServer.html
 
     @Override
-    public WalletServiceDto getWalletMock(Long userId) {
+    public WalletServiceDto getWalletMock(String userName) {
         RestTemplate restTemplate = new RestTemplate();
         MockRestServiceServer mockServer = MockRestServiceServer.createServer(restTemplate);
 
@@ -26,7 +26,7 @@ public class WalletServiceCallImpl implements WalletServiceCall{
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess("{ \"id\" : \"123\", \"code\" : \"xxx\"}", MediaType.APPLICATION_JSON));
 
-        WalletServiceDto walletServiceDto = restTemplate.getForObject("/wallet/{id}", WalletServiceDto.class, userId);
+        WalletServiceDto walletServiceDto = restTemplate.getForObject("/wallet/{userId}", WalletServiceDto.class, userName);
 
         mockServer.verify();
         return walletServiceDto;

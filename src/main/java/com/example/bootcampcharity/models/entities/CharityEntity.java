@@ -23,9 +23,13 @@ public class CharityEntity extends BaseEntity {
     private String descriptionCharity;
     @Column(name = "STATUS")
     private Boolean status;
+    @Column(name = "IBAN")
+    private String iban;
+    @Column(name = "MERCHANT")
+    private String merchant;
     @Column(name = "WALLET_ID")
     private Long walletId;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "charity", cascade = CascadeType.MERGE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "charity", cascade = CascadeType.PERSIST)
     private List<TransactionLogEntity> transactionLogs;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CATEGORY_ID", nullable = false)

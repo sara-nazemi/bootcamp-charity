@@ -11,9 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class CharityServiceImpl extends BaseServiceImpl<CharityEntity, Long> implements CharityService {
@@ -40,14 +40,19 @@ public class CharityServiceImpl extends BaseServiceImpl<CharityEntity, Long> imp
     }
 
     @Override
+    public CharityEntity findById(Long aLong) {
+       return super.findById(aLong);
+    }
+
+    @Override
     public Boolean charity(DepositCharityInfoDto dto) {
 
-        Long userId = dto.getUserId();
+       String userName = dto.getUserName();
 
         LOGGER.info("start get wallet");
         //دریافت اطلاعات ولت کاربر
 
-        WalletServiceDto walletMock = walletServiceCall.getWalletMock(userId);
+        WalletServiceDto walletMock = walletServiceCall.getWalletMock(userName);
 
         LOGGER.info("get wallet");
         LOGGER.info("start get object of charity entity");
@@ -79,5 +84,12 @@ public class CharityServiceImpl extends BaseServiceImpl<CharityEntity, Long> imp
         return Boolean.TRUE;
     }
 
+    @Override
+    public List<CharityEntity> findAll() {
+        return super.findAll();
+    }
 
+    public void delete(Long id){
+        super.deleteById(id);
+    }
 }

@@ -24,4 +24,6 @@ public class CharityController extends BaseController<CharityEntity, CharityDto,
         objectCharityResponse.setData(charity);
         return objectCharityResponse;
     }
+
+
 }

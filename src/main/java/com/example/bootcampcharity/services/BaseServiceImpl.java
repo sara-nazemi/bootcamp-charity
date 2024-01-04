@@ -1,9 +1,10 @@
 package com.example.bootcampcharity.services;
 
+import com.example.bootcampcharity.models.entities.CharityEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 public abstract class BaseServiceImpl<E, ID> implements BaseService<E, ID> {
 
@@ -15,14 +16,12 @@ public abstract class BaseServiceImpl<E, ID> implements BaseService<E, ID> {
     }
 
     @Override
-    public E findById(ID id) {
-        return getRepository().findById(id).get();
-    }
-
-    @Override
     public void deleteById(ID id) {
         getRepository().deleteById(id);
     }
+     public E findById(ID d){
+        return (E) getRepository().findById(d);
+     }
 
     @Override
     public List<E> findAll() {

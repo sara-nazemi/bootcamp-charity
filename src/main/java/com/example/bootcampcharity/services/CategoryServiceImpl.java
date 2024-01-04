@@ -16,4 +16,9 @@ public class CategoryServiceImpl extends BaseServiceImpl<CategoryEntity,Long> im
     protected JpaRepository<CategoryEntity, Long> getRepository() {
         return categoryRepository;
     }
+
+    @Override
+    public CategoryEntity findById(Long aLong) {
+        return null;
+    }
 }

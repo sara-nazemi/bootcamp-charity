@@ -17,4 +17,9 @@ public class TransactionLogServiceImpl extends BaseServiceImpl<TransactionLogEnt
     protected JpaRepository<TransactionLogEntity, Long> getRepository() {
         return transactionLogRepository;
     }
+
+    @Override
+    public TransactionLogEntity findById(Long aLong) {
+        return null;
+    }
 }
