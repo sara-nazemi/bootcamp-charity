@@ -1,6 +1,7 @@
-package com.example.bootcampcharity.services.serviceCall;
+package com.example.bootcampcharity.services.mockServiceCall;
 
 import com.example.bootcampcharity.models.dtoes.serviceCall.WalletServiceDto;
+import com.example.bootcampcharity.services.mockServiceCall.WalletServiceCall;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 @Service
-public class WalletServiceCallImpl implements WalletServiceCall{
+public class WalletServiceCallImpl implements WalletServiceCall {
 
     //https://docs.spring.io/spring-framework/docs/3.2.x/javadoc-api/org/springframework/test/web/client/MockRestServiceServer.html
 

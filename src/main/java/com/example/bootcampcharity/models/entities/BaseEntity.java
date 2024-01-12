@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
 
@@ -13,6 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @MappedSuperclass
 @ToString
+@EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity {
     private static final long serialVersionUID = 1234567L;
 

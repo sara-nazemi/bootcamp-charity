@@ -1,19 +1,13 @@
-package com.example.bootcampcharity.services.serviceCall;
+package com.example.bootcampcharity.services.mockServiceCall;
 
-import com.example.bootcampcharity.models.dtoes.serviceCall.TokenValidityDto;
-import com.example.bootcampcharity.models.dtoes.serviceCall.WalletServiceDto;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
+import com.example.bootcampcharity.services.mockServiceCall.IdentityServiceCall;
 import org.springframework.stereotype.Service;
-import org.springframework.test.web.client.MockRestServiceServer;
-import org.springframework.web.client.RestTemplate;
 
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 @Service
-public class IdentityServiceCallImpl implements IdentityServiceCall{
+public class IdentityServiceCallImpl implements IdentityServiceCall {
 //    @Override
 //    public TokenValidityDto checkValidityToken(String token) {
 //        RestTemplate restTemplate = new RestTemplate();

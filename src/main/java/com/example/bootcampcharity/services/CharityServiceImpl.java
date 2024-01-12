@@ -5,7 +5,7 @@ import com.example.bootcampcharity.models.dtoes.serviceCall.WalletServiceDto;
 import com.example.bootcampcharity.models.entities.CharityEntity;
 import com.example.bootcampcharity.models.entities.TransactionLogEntity;
 import com.example.bootcampcharity.repositories.CharityRepository;
-import com.example.bootcampcharity.services.serviceCall.WalletServiceCall;
+import com.example.bootcampcharity.services.mockServiceCall.WalletServiceCall;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.example.bootcampcharity.services.serviceCall;
+package com.example.bootcampcharity.services.mockServiceCall;
 
 import com.example.bootcampcharity.models.dtoes.serviceCall.TokenValidityDto;
 

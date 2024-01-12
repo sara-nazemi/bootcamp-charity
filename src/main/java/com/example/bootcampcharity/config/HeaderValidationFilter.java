@@ -1,7 +1,7 @@
 package com.example.bootcampcharity.config;
 
 import com.example.bootcampcharity.models.dtoes.serviceCall.TokenValidityResponseDto;
-import com.example.bootcampcharity.services.serviceCall.IdentityServiceFeignClient;
+import com.example.bootcampcharity.services.feignServiceCall.IdentityServiceFeignClient;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
