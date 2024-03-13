@@ -2,7 +2,6 @@ package com.example.bootcampcharity.controlleradvice;
 
 import com.example.bootcampcharity.exceptions.CharityException;
 import com.example.bootcampcharity.sampleRespose.CharityResponse;
-import com.example.bootcampcharity.models.documents.LogDocument;
 import com.example.bootcampcharity.util.ResourceBundleUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
@@ -24,13 +23,11 @@ import java.util.List;
 public class ControllerExceptionHandler {
     private final ResourceBundleUtil resourceBundleUtil;
 
-    private final CharityException exceptionService;
     private static final Logger LOGGER = LoggerFactory.getLogger(ControllerExceptionHandler.class);
 
     @Autowired
-    public ControllerExceptionHandler(ResourceBundleUtil resourceBundleUtil, CharityException exceptionService) {
+    public ControllerExceptionHandler(ResourceBundleUtil resourceBundleUtil) {
         this.resourceBundleUtil = resourceBundleUtil;
-        this.exceptionService = exceptionService;
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
@@ -39,11 +36,6 @@ public class ControllerExceptionHandler {
             MethodArgumentTypeMismatchException exception, HttpServletRequest request) {
         String propertyName = exception.getPropertyName();
         Class<?> requiredType = exception.getRequiredType();
-
-        LogDocument exceptionDocument = new LogDocument();
-        exceptionDocument.setMessage("input parameter " + propertyName + " required this type : " + requiredType);
-        exceptionDocument.setCode("internal.server.error");
-        exceptionService.saveException(exceptionDocument);
 
         String lang = request.getHeader("lang");
         return CharityResponse.builder()
@@ -75,11 +67,6 @@ public class ControllerExceptionHandler {
     private CharityResponse<?> getCharityResponse(HttpServletRequest request, String code1) {
         String message1 = resourceBundleUtil.getMessage(code1, request.getHeader("lang"));
 
-        LogDocument exceptionDocument = new LogDocument();
-        exceptionDocument.setMessage(message1);
-        exceptionDocument.setCode(code1);
-        exceptionService.saveException(exceptionDocument);
-
         return CharityResponse.builder()
                 .message(message1)
                 .code(code1)
@@ -102,13 +89,6 @@ public class ControllerExceptionHandler {
     public @ResponseBody CharityResponse<?> handleAnyException(Exception exception, HttpServletRequest request) {
         String lang = request.getHeader("lang");
         String message3 = resourceBundleUtil.getMessage("Charity.internal.server.error", lang);
-
-        LOGGER.error("Error occurred in controller!", exception);
-
-        LogDocument exceptionDocument = new LogDocument();
-        exceptionDocument.setMessage(message3);
-        exceptionDocument.setCode("Charity.internal.server.error");
-        exceptionService.saveException(exceptionDocument);
 
         return CharityResponse.builder()
                 .message(message3)
