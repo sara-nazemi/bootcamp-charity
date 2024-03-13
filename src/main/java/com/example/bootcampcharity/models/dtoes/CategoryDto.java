@@ -7,6 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Builder
 public class CategoryDto extends BaseDto {
     private Long id;
     private String nameCategory;

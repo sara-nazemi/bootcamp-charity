@@ -3,7 +3,6 @@ package com.example.bootcampcharity.services;
 import com.example.bootcampcharity.models.dtoes.DepositCharityInfoDto;
 import com.example.bootcampcharity.models.dtoes.serviceCall.WalletServiceDto;
 import com.example.bootcampcharity.models.entities.CharityEntity;
-import com.example.bootcampcharity.models.entities.TransactionLogEntity;
 import com.example.bootcampcharity.repositories.CharityRepository;
 import com.example.bootcampcharity.services.mockServiceCall.WalletServiceCall;
 import org.slf4j.Logger;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -24,8 +22,6 @@ public class CharityServiceImpl extends BaseServiceImpl<CharityEntity, Long> imp
     @Autowired
     private CharityRepository charityRepository;
 
-    @Autowired
-    private TransactionLogService transactionLogService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CharityServiceImpl.class);
 
@@ -41,13 +37,13 @@ public class CharityServiceImpl extends BaseServiceImpl<CharityEntity, Long> imp
 
     @Override
     public CharityEntity findById(Long aLong) {
-       return super.findById(aLong);
+        return super.findById(aLong);
     }
 
     @Override
     public Boolean charity(DepositCharityInfoDto dto) {
 
-       String userName = dto.getUserName();
+        String userName = dto.getUserName();
 
         LOGGER.info("start get wallet");
         //دریافت اطلاعات ولت کاربر
@@ -71,16 +67,6 @@ public class CharityServiceImpl extends BaseServiceImpl<CharityEntity, Long> imp
         WalletServiceDto walletServiceDto1 = walletServiceCall.depositWallet(byId.getWalletId(), dto.getAmount());
         LOGGER.info("deposit of user wallet");
 
-        //لاگ کردن عملیات تراکنش
-        TransactionLogEntity transactionLogEntity = new TransactionLogEntity();
-        transactionLogEntity.setCharity(byId);
-        transactionLogEntity.setAmount(dto.getAmount());
-        transactionLogEntity.setVersion(0);
-        transactionLogEntity.setInsertDate(new Date());
-        transactionLogEntity.setLastModifiedDate(new Date());
-
-        TransactionLogEntity save = transactionLogService.save(transactionLogEntity);
-
         return Boolean.TRUE;
     }
 
@@ -89,7 +75,7 @@ public class CharityServiceImpl extends BaseServiceImpl<CharityEntity, Long> imp
         return super.findAll();
     }
 
-    public void delete(Long id){
+    public void delete(Long id) {
         super.deleteById(id);
     }
 }

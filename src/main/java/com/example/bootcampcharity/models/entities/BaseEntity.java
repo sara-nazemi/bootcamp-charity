@@ -1,6 +1,9 @@
 package com.example.bootcampcharity.models.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Version;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -28,13 +31,4 @@ public abstract class BaseEntity {
     @Version
     private Integer version;
 
-    @PrePersist
-    protected void onCreate() {
-        this.insertDate = this.lastModifiedDate = new Date();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        this.lastModifiedDate = new Date();
-    }
 }

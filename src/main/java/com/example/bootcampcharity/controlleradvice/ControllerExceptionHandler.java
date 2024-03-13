@@ -1,9 +1,8 @@
-package com.example.bootcampcharity.exceptions;
+package com.example.bootcampcharity.controlleradvice;
 
+import com.example.bootcampcharity.exceptions.CharityException;
 import com.example.bootcampcharity.sampleRespose.CharityResponse;
-import com.example.bootcampcharity.models.documents.ExceptionDocument;
-import com.example.bootcampcharity.sampleRespose.CharityResponse;
-import com.example.bootcampcharity.services.ExceptionService;
+import com.example.bootcampcharity.models.documents.LogDocument;
 import com.example.bootcampcharity.util.ResourceBundleUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
@@ -25,11 +24,11 @@ import java.util.List;
 public class ControllerExceptionHandler {
     private final ResourceBundleUtil resourceBundleUtil;
 
-    private final ExceptionService exceptionService;
+    private final CharityException exceptionService;
     private static final Logger LOGGER = LoggerFactory.getLogger(ControllerExceptionHandler.class);
 
     @Autowired
-    public ControllerExceptionHandler(ResourceBundleUtil resourceBundleUtil, ExceptionService exceptionService) {
+    public ControllerExceptionHandler(ResourceBundleUtil resourceBundleUtil, CharityException exceptionService) {
         this.resourceBundleUtil = resourceBundleUtil;
         this.exceptionService = exceptionService;
     }
@@ -41,7 +40,7 @@ public class ControllerExceptionHandler {
         String propertyName = exception.getPropertyName();
         Class<?> requiredType = exception.getRequiredType();
 
-        ExceptionDocument exceptionDocument = new ExceptionDocument();
+        LogDocument exceptionDocument = new LogDocument();
         exceptionDocument.setMessage("input parameter " + propertyName + " required this type : " + requiredType);
         exceptionDocument.setCode("internal.server.error");
         exceptionService.saveException(exceptionDocument);
@@ -76,7 +75,7 @@ public class ControllerExceptionHandler {
     private CharityResponse<?> getCharityResponse(HttpServletRequest request, String code1) {
         String message1 = resourceBundleUtil.getMessage(code1, request.getHeader("lang"));
 
-        ExceptionDocument exceptionDocument = new ExceptionDocument();
+        LogDocument exceptionDocument = new LogDocument();
         exceptionDocument.setMessage(message1);
         exceptionDocument.setCode(code1);
         exceptionService.saveException(exceptionDocument);
@@ -106,7 +105,7 @@ public class ControllerExceptionHandler {
 
         LOGGER.error("Error occurred in controller!", exception);
 
-        ExceptionDocument exceptionDocument = new ExceptionDocument();
+        LogDocument exceptionDocument = new LogDocument();
         exceptionDocument.setMessage(message3);
         exceptionDocument.setCode("Charity.internal.server.error");
         exceptionService.saveException(exceptionDocument);

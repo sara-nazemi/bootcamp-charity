@@ -17,21 +17,18 @@ public class CharityEntity extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private Long id;
-    @Column(name = "NAME_CHARITY")
+    @Column(name = "NAME")
     private String nameCharity;
-    @Column(name = "DESCRIPTION_CHARITY")
+    @Column(name = "DESCRIPTION")
     private String descriptionCharity;
     @Column(name = "STATUS")
-    private Boolean status;
+    private CharityStatus status;
     @Column(name = "IBAN")
     private String iban;
     @Column(name = "MERCHANT")
     private String merchant;
     @Column(name = "WALLET_ID")
     private Long walletId;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "charity", cascade = CascadeType.PERSIST)
-    private List<TransactionLogEntity> transactionLogs;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CATEGORY_ID", nullable = false)
-    private CategoryEntity category;
+    @OneToMany (fetch = FetchType.LAZY, mappedBy = "charity", cascade = CascadeType.PERSIST)
+    private List<CategoryRating> categories2;
 }

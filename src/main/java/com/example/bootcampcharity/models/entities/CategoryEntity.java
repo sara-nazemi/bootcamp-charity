@@ -17,10 +17,10 @@ public class CategoryEntity extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private Long id;
-    @Column(name = "NAME_CATEGORY")
+    @Column(name = "NAME")
     private String nameCategory;
-    @Column(name = "DESCRIPTION_CATEGORY")
+    @Column(name = "DESCRIPTION")
     private String descriptionCategory;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category", cascade = CascadeType.PERSIST)
-    private List<CharityEntity> charities;
+    @OneToMany (fetch = FetchType.LAZY, mappedBy = "category", cascade = CascadeType.PERSIST)
+    private List<CategoryRating> categoryRatings;
 }
